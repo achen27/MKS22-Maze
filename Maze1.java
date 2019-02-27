@@ -19,15 +19,22 @@ public class Maze1{
     Scanner scan = new Scanner(f);
     String output = "";
     int r = 0;
+    int c = 0;
     while (scan.hasNextLine()){
       String line = scan.nextLine();
+      c = line.length();
+      output += line;
       r++;
     }
-    char[][] a = new char[r][scan.nextLine().length()];
+    System.out.println(r);
+    char[][] a = new char[r][c];
     scan = new Scanner(output);
     for (int i = 0; i < a.length; i++){
       for (int j = 0; j < a[0].length; j++){
-        a[i][j] = scan.next().charAt(0);
+        if (scan.hasNext()){
+          String str = scan.next();
+          a[i][j] = str.charAt(0);
+        }
       }
     }
     return toString(a);
@@ -49,7 +56,7 @@ public class Maze1{
   public static void main(String[] args){
     try {
       String s = args[0];
-      System.out.println(printMaze(s));
+      System.out.println(printArray(s));
     } catch (FileNotFoundException e){
       System.out.println("File not found");
     }
