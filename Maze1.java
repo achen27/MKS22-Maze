@@ -26,15 +26,13 @@ public class Maze1{
       output += line;
       r++;
     }
-    System.out.println(r);
+    //System.out.println(r);
     char[][] a = new char[r][c];
-    scan = new Scanner(output);
+    int idx = 0;
     for (int i = 0; i < a.length; i++){
       for (int j = 0; j < a[0].length; j++){
-        if (scan.hasNext()){
-          String str = scan.next();
-          a[i][j] = str.charAt(0);
-        }
+        a[i][j] = output.charAt(idx);
+        idx++;
       }
     }
     return toString(a);
