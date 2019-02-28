@@ -94,8 +94,8 @@ public class Maze{
     Since the constructor exits when the file is not found or is missing an E or S, we can assume it exists.
   */
   public int solve(){
-    int r;
-    int c;
+    int r = 0;
+    int c = 0;
     for (int i = 0; i < maze.length; i++){
       for (int j = 0; j < maze[0].length; j++){
         if (maze[i][j] == 'S'){
@@ -104,8 +104,7 @@ public class Maze{
         }
       }
     }
-
-          //erase the S
+    maze[r][c] = ' ';
 
           //and start solving at the location of the s.
           //return solve(???,???);
