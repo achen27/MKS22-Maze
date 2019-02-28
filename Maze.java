@@ -55,6 +55,10 @@ public class Maze{
           }
         }
 
+        if (countS != 1 || countE != 1){
+          throw new IllegalStateException("Too many/No Start/End");
+        }
+
       }catch(FileNotFoundException e){
         System.out.println("File Not Found");
       }
