@@ -77,15 +77,21 @@ public class Maze{
       return output;
     }
 
-    public static void main(String[] args){
+    private void wait(int millis){
       try {
-        String s = args[0];
-        System.out.println(s);
-        Maze m = new Maze(s);
-        System.out.println(m.toString());
-      } catch (FileNotFoundException e){
-        System.out.println("File not found");
+        Thread.sleep(millis);
+      }catch (InterruptedException e) {
+        
       }
+     }
+
+    public void setAnimate(boolean b){
+        animate = b;
+    }
+
+    public void clearTerminal(){
+        //erase terminal, go to top left of screen.
+        System.out.println("\033[2J\033[1;1H");
     }
 
 }
