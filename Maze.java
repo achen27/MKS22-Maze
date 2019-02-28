@@ -5,6 +5,8 @@ public class Maze{
 
   private char[][] maze;
   private boolean animate;//false by default
+  private int[] rows = {1,0,-1,0};
+  private int[] cols = {0,1,0,-1};
 
   /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -106,8 +108,34 @@ public class Maze{
     }
     maze[r][c] = ' ';
 
-          //and start solving at the location of the s.
-          //return solve(???,???);
+    return solve(r,c);
   }
+
+  /*
+        Recursive Solve function:
+
+        A solved maze has a path marked with '@' from S to E.
+
+        Returns the number of @ symbols from S to E when the maze is solved,
+        Returns -1 when the maze has no solution.
+
+        Postcondition:
+          The S is replaced with '@' but the 'E' is not.
+          All visited spots that were not part of the solution are changed to '.'
+          All visited spots that are part of the solution are changed to '@'
+      */
+  private int solve(int row, int col){ //you can add more parameters since this is private
+
+        //automatic animation! You are welcome.
+        if(animate){
+            clearTerminal();
+            System.out.println(this);
+            wait(20);
+        }
+
+        //COMPLETE SOLVE
+        return -1; //so it compiles
+    }
+
 
 }
