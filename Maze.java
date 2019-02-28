@@ -106,8 +106,8 @@ public class Maze{
         }
       }
     }
-    maze[r][c] = ' ';
-
+    maze[r][c] = '@';
+    System.out.println("START AT:" + r + " " + c);
     return solve(r,c,0);
   }
 
@@ -130,21 +130,28 @@ public class Maze{
         if(animate){
             clearTerminal();
             System.out.println(this);
-            wait(20);
+            wait(100);
         }
 
+        System.out.println(row + " " + col);
         if (maze[row][col] == 'E'){
+          System.out.println("end found");
           return count;
         }
         for (int i = 0; i < 4; i++){
-          if (maze[row][col] == ' '){
-            maze[row][col] = '@';
-            return solve(row+rows[i], col+cols[i], count+1);
-          } else {
-            maze[row][col] = '.';
-          }
+          System.out.println(row + " " + col);
+          System.out.println(row+rows[i] + " " + col+cols[i]);
 
+          if (maze[row+rows[i]][col+cols[i]] == 'E'){
+            solve(row+rows[i], col+cols[i], count+1);
+          } else if (maze[row+rows[i]][col+cols[i]] == ' '){
+            maze[row+rows[i]][col+cols[i]] = '@';
+            solve(row+rows[i], col+cols[i], count+1);
+          }
+          System.out.println(this.toString());
         }
+        maze[row][col] = '.';
+        System.out.println("no end");
         return -1; //so it compiles
     }
 
