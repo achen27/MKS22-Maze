@@ -65,4 +65,17 @@ public class Maze{
 
     }
 
+    public static String toString(char[][] c){
+      String output = "";
+      for (int i = 0; i < c.length; i++){
+        for (int j = 0; j < c[0].length; j++){
+          output += c[i][j];
+          if (j == c[0].length - 1){
+            output += "\n";
+          }
+        }
+      }
+      return output;
+    }
+
 }
