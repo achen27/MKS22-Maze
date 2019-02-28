@@ -5,8 +5,8 @@ public class Maze{
 
   private char[][] maze;
   private boolean animate;//false by default
-  private int[] rows = {1,0,-1,0};
-  private int[] cols = {0,1,0,-1};
+  private int[] rows = {1,0,-1,0}; //arrays to store possible
+  private int[] cols = {0,1,0,-1};         //ways to move
 
   /*Constructor loads a maze text file, and sets animate to false by default.
 
@@ -23,41 +23,46 @@ public class Maze{
   */
   public Maze(String filename) throws FileNotFoundException{
     animate = false;
+    try{
+      File f = new File(filename); //creats new file
+      Scanner scan = new Scanner(f); //creates new scanenr
+      String output = ""; //string to move file contents into
+      int r = 0; //variable to store number of line
+      int c = 0; //variable to store length of line
 
-    File f = new File(filename);
-    Scanner scan = new Scanner(f);
-    String output = "";
-    int r = 0;
-    int c = 0;
-
-    while (scan.hasNextLine()){
-      String line = scan.nextLine();
-      c = line.length();
-      output += line;
-      r++;
-    }
-
-     maze = new char[r][c];
-    int idx = 0;
-    int countS = 0;
-    int countE = 0;
-
-    for (int i = 0; i < maze.length; i++){
-      for (int j = 0; j < maze[0].length; j++){
-        maze[i][j] = output.charAt(idx);
-        if (maze[i][j] == 'S'){
-          countS++;
-        }
-        if (maze[i][j] == 'E'){
-          countE++;
-        }
-        idx++;
+      while (scan.hasNextLine()){ //reading file into string
+        String line = scan.nextLine();
+        c = line.length();
+        output += line;
+        r++;
       }
+
+      maze = new char[r][c]; //creates new 2Dchar array for maze
+      int idx = 0; //variable to keep track of location in output string
+      int countS = 0; //variable to keep track of number of number of S
+      int countE = 0; //variable to keep track of number of number of E
+
+      for (int i = 0; i < maze.length; i++){ //moving string into array
+        for (int j = 0; j < maze[0].length; j++){
+          maze[i][j] = output.charAt(idx);
+          if (maze[i][j] == 'S'){
+            countS++;
+          }
+          if (maze[i][j] == 'E'){
+            countE++;
+          }
+          idx++;
+        }
+      }
+
+      if (countS != 1 || countE != 1){ //checks to see if there is exactly one S and E
+        throw new IllegalStateException("Too many/No Start/End");
+      }
+    } catch(FileNotFoundException e){
+      System.out.println("Invalid filename: "+filename);
+
     }
 
-    if (countS != 1 || countE != 1){
-      throw new IllegalStateException("Too many/No Start/End");
-    }
 
   }
 
@@ -159,7 +164,7 @@ public class Maze{
         return -1; //so it compiles
     }
 
-    public int countSteps(){
+    private int countSteps(){
       int c = 0;
       for (int i = 0; i < maze.length; i++){
         for (int j = 0; j < maze[0].length; j++){
