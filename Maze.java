@@ -136,8 +136,15 @@ public class Maze{
         if (maze[row][col] == 'E'){
           return count;
         }
+        for (int i = 0; i < 4; i++){
+          if (maze[row][col] == ' '){
+            maze[row][col] = '@';
+            return solve(row+rows[i], col+cols[i], count+1);
+          } else {
+            maze[row][col] = '.';
+          }
 
-        //COMPLETE SOLVE
+        }
         return -1; //so it compiles
     }
 
