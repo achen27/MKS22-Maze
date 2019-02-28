@@ -134,12 +134,11 @@ public class Maze{
         }
         if (maze[row][col] == 'E'){
           maze[row][col] = 'E';
-          count++;
           return count;
         }
-        System.out.println(row + " " + col);
+        //System.out.println(row + " " + col);
         for (int i = 0; i < 4; i++){
-            System.out.println(this.toString());
+            //System.out.println(this.toString());
 
           if (maze[row+rows[i]][col+cols[i]] == ' '  || maze[row+rows[i]][col+cols[i]] == 'E'){
             if (maze[row+rows[i]][col+cols[i]] == ' '){
@@ -151,14 +150,25 @@ public class Maze{
               return count;
             } else {
               maze[row+rows[i]][col+cols[i]] = '.';
-              count--;
             }
           }
 
         }
-        System.out.println("count = " +count);
-        System.out.println("no end");
+        //System.out.println("count = " +count);
+        //System.out.println("no end");
         return -1; //so it compiles
+    }
+
+    public int countSteps(){
+      int c = 0;
+      for (int i = 0; i < maze.length; i++){
+        for (int j = 0; j < maze[0].length; j++){
+          if (maze[i][j] == '@'){
+            c++;
+          }
+        }
+      }
+      return c;
     }
 
 
