@@ -134,6 +134,7 @@ public class Maze{
         }
         if (maze[row][col] == 'E'){
           maze[row][col] = 'E';
+          count++;
           return count;
         }
         System.out.println(row + " " + col);
@@ -144,7 +145,9 @@ public class Maze{
             if (maze[row+rows[i]][col+cols[i]] == ' '){
                 maze[row+rows[i]][col+cols[i]] = '@';
             }
-            if (solve(row+rows[i],col+cols[i],count+1) != -1){
+            int c = solve(row+rows[i],col+cols[i],count+1);
+            if (c != -1){
+              count = c;
               return count;
             } else {
               maze[row+rows[i]][col+cols[i]] = '.';
