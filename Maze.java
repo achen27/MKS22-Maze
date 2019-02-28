@@ -37,18 +37,17 @@ public class Maze{
           r++;
         }
 
-        char[][] a = new char[r][c];
         int idx = 0;
         int countS = 0;
         int countE = 0;
 
-        for (int i = 0; i < a.length; i++){
-          for (int j = 0; j < a[0].length; j++){
-            a[i][j] = output.charAt(idx);
-            if (a[i][j] == 'S'){
+        for (int i = 0; i < maze.length; i++){
+          for (int j = 0; j < maze[0].length; j++){
+            maze[i][j] = output.charAt(idx);
+            if (maze[i][j] == 'S'){
               countS++;
             }
-            if (a[i][j] == 'E'){
+            if (maze[i][j] == 'E'){
               countE++;
             }
             idx++;
@@ -65,17 +64,28 @@ public class Maze{
 
     }
 
-    public static String toString(char[][] c){
+    public String toString(){
       String output = "";
-      for (int i = 0; i < c.length; i++){
-        for (int j = 0; j < c[0].length; j++){
-          output += c[i][j];
-          if (j == c[0].length - 1){
+      for (int i = 0; i < maze.length; i++){
+        for (int j = 0; j < maze[0].length; j++){
+          output += maze[i][j];
+          if (j == maze[0].length - 1){
             output += "\n";
           }
         }
       }
       return output;
+    }
+
+    public static void main(String[] args){
+      try {
+        String s = args[0];
+        System.out.println(s);
+        Maze m = new Maze(s);
+        System.out.println(m.toString());
+      } catch (FileNotFoundException e){
+        System.out.println("File not found");
+      }
     }
 
 }
