@@ -66,7 +66,7 @@ public class Maze{
 
   }
 
-  public String toString(){
+  public String toString(){ //method to print out maze
     String output = "";
     for (int i = 0; i < maze.length; i++){
       for (int j = 0; j < maze[0].length; j++){
@@ -103,7 +103,7 @@ public class Maze{
   public int solve(){
     int r = 0;
     int c = 0;
-    for (int i = 0; i < maze.length; i++){
+    for (int i = 0; i < maze.length; i++){ //finds position of S
       for (int j = 0; j < maze[0].length; j++){
         if (maze[i][j] == 'S'){
           r = i;
@@ -111,9 +111,8 @@ public class Maze{
         }
       }
     }
-    maze[r][c] = '@';
-    System.out.println("START AT:" + r + " " + c);
-    return solve(r,c,0);
+    maze[r][c] = '@'; //sets S to @
+    return solve(r,c,0); //returns helper method
   }
 
   /*
@@ -129,7 +128,7 @@ public class Maze{
           All visited spots that were not part of the solution are changed to '.'
           All visited spots that are part of the solution are changed to '@'
       */
-  private int solve(int row, int col, int count){ //you can add more parameters since this is private
+  private int solve(int row, int col, int count){
 
         //automatic animation! You are welcome.
         if(animate){
@@ -137,19 +136,18 @@ public class Maze{
             System.out.println(this);
             wait(100);
         }
-        if (maze[row][col] == 'E'){
+
+        if (maze[row][col] == 'E'){ //base case if E is found
           maze[row][col] = 'E';
           return count;
         }
-        //System.out.println(row + " " + col);
-        for (int i = 0; i < 4; i++){
-            //System.out.println(this.toString());
+        for (int i = 0; i < 4; i++){ //loops through 4 ways to move
 
-          if (maze[row+rows[i]][col+cols[i]] == ' '  || maze[row+rows[i]][col+cols[i]] == 'E'){
-            if (maze[row+rows[i]][col+cols[i]] == ' '){
+          if (maze[row+rows[i]][col+cols[i]] == ' '  || maze[row+rows[i]][col+cols[i]] == 'E'){ //if next move lands on a space or an E
+            if (maze[row+rows[i]][col+cols[i]] == ' '){ //if next move is space place an @
                 maze[row+rows[i]][col+cols[i]] = '@';
             }
-            int c = solve(row+rows[i],col+cols[i],count+1);
+            int c = solve(row+rows[i],col+cols[i],count+1); //recursion on next move
             if (c != -1){
               count = c;
               return count;
@@ -159,12 +157,11 @@ public class Maze{
           }
 
         }
-        //System.out.println("count = " +count);
-        //System.out.println("no end");
+
         return -1; //so it compiles
     }
 
-    private int countSteps(){
+    private int countSteps(){ //debugging function to check number of @ in maze
       int c = 0;
       for (int i = 0; i < maze.length; i++){
         for (int j = 0; j < maze[0].length; j++){
